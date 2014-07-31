@@ -1,0 +1,1 @@
+The SimpleDaemon component for UTipdMe.
