@@ -26,8 +26,10 @@ class Daemon
         pcntl_signal(SIGTERM, array($this, 'handleSignal'));
         pcntl_signal(SIGINT, array($this, 'handleSignal'));
 
-        $last_run_time = 0;
+        $last_run_start = 0;
         while (!$this->shutting_down) {
+            $last_run_start = time();
+
             try {
                 // execute loop
                 call_user_func($this->loop_function);
@@ -39,10 +41,10 @@ class Daemon
                 }
             }
 
-            $wait_time = time() - $last_run_time;
-            if ($wait_time > 0) { sleep($wait_time); }
+            // sleep
+            $wait_time = $this->loop_interval - (time() - $last_run_start);
+            if ($wait_time > 0 AND !$this->shutting_down) { sleep($wait_time); }
         }
-
     }
 
 
