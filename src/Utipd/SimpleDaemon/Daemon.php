@@ -15,6 +15,7 @@ class Daemon
 
     public function __construct(Callable $loop_function, Callable $error_handler=null, LoggerInterface $logger=null) {
         $this->loop_function = $loop_function;
+        $this->error_handler = $error_handler;
         $this->logger = $logger;
     }
 
