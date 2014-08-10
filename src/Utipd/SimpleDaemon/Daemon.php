@@ -36,7 +36,7 @@ class Daemon
                 call_user_func($this->loop_function);
             } catch (Exception $e) {
                 if ($this->error_handler) {
-                    call_user_func($this->loop_function, $e);
+                    call_user_func($this->error_handler, $e);
                 } else {
                     if ($this->logger) { $this->logger->error($e->getMessage()); }
                 }
