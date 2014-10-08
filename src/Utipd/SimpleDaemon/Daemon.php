@@ -19,6 +19,10 @@ class Daemon
         $this->logger = $logger;
     }
 
+    public function setLoopInterval($loop_interval) {
+        $this->loop_interval = $loop_interval;
+    }
+
     public function run() {
         // IMPORTANT:
         // For the sighandlers to work, you will need to have this in your calling script:
